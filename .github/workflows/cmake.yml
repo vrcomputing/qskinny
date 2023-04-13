@@ -363,7 +363,7 @@ jobs:
 
       - name: Build ( QSkinny )
         shell: bash
-        run: cmake --build qskinny_build --config ${{ matrix.config.build_type }}
+        run: cmake --build qskinny_build --config ${{ matrix.config.build_type }} --parallel 8
 
       #- name: Tests
       #  shell: bash
