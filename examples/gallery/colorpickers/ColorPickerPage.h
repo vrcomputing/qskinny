@@ -48,3 +48,36 @@ class QskColorWheelSkinlet : public QskSkinlet
     QSizeF sizeHint(
         const QskSkinnable* skinnable, Qt::SizeHint which, const QSizeF& ) const override;
 };
+
+class QskBrightnessTriangle : public QskControl
+{
+  public:
+    QSK_SUBCONTROLS( Panel, Arc, Triangle, Handle )
+    explicit QskBrightnessTriangle( QQuickItem* parent = nullptr );
+
+  private:
+    void mousePressEvent( QMouseEvent* event ) override;
+    void mouseReleaseEvent( QMouseEvent* event ) override;
+    void mouseMoveEvent( QMouseEvent* event ) override;
+};
+
+class QskBrightnessTriangleSkinlet : public QskSkinlet
+{
+  public:
+    enum NodeRoles
+    {
+        ArcRole,
+        TriangleRole
+    };
+
+    QskBrightnessTriangleSkinlet( QskSkin* skin = nullptr );
+
+    QRectF subControlRect(
+        const QskSkinnable* skinnable, const QRectF&, QskAspect::Subcontrol ) const override;
+
+    QSGNode* updateSubNode(
+        const QskSkinnable* skinnable, quint8 nodeRole, QSGNode* ) const override;
+
+    QSizeF sizeHint(
+        const QskSkinnable* skinnable, Qt::SizeHint which, const QSizeF& ) const override;
+};
