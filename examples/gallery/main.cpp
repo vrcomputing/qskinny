@@ -10,6 +10,7 @@
 #include "selector/SelectorPage.h"
 #include "dialog/DialogPage.h"
 #include "listbox/ListBoxPage.h"
+#include "colorpickers/ColorPickerPage.h"
 
 #include <SkinnyShortcut.h>
 #include <SkinnyShapeProvider.h>
@@ -257,6 +258,7 @@ namespace
             tabView->addPage( "Selectors", new SelectorPage() );
             tabView->addPage( "Dialogs", new DialogPage() );
             tabView->addPage( "ListBox", new ListBoxPage() );
+            tabView->addPage( "Color Pickers", new ColorPickerPage() );
 
             connect( header, &Header::enabledToggled,
                 tabView, &TabView::setPagesEnabled );
