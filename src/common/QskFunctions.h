@@ -69,6 +69,15 @@ inline constexpr bool qskFuzzyCompare( qreal value1, qreal value2 )
     return qFuzzyCompare( value1, value2 );
 }
 
+inline constexpr qreal qskMapValueRange( qreal value, qreal srcMin, qreal srcMax, qreal dstMin, qreal dstMax )
+{
+    value = std::min( std::max( value, srcMin ), srcMax );
+    double percentage = ( value - srcMin ) / ( srcMax - srcMin );
+    double mappedValue = dstMin + percentage * ( dstMax - dstMin );
+    return mappedValue;
+}
+
+
 QSK_EXPORT qreal qskFuzzyFloor( qreal value, qreal stepSize );
 QSK_EXPORT qreal qskFuzzyCeil( qreal value, qreal stepSize );
 

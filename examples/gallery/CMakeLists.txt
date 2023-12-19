@@ -11,7 +11,25 @@ set(SOURCES
     selector/SelectorPage.h selector/SelectorPage.cpp
     dialog/DialogPage.h dialog/DialogPage.cpp
     listbox/ListBoxPage.h listbox/ListBoxPage.cpp
-    colorpickers/ColorPickerPage.h colorpickers/ColorPickerPage.cpp
+
+    colorpickers/ColorPickerPage.cpp
+    colorpickers/ColorPickerPage.h
+    colorpickers/QskColorRectangle.cpp
+    colorpickers/QskColorRectangle.h
+    colorpickers/QskColorRectangleSkinlet.cpp
+    colorpickers/QskColorRectangleSkinlet.h
+    colorpickers/QskColorTriangle.cpp
+    colorpickers/QskColorTriangle.h
+    colorpickers/QskColorTriangleNode.cpp
+    colorpickers/QskColorTriangleNode.h
+    colorpickers/QskColorTriangleSkinlet.cpp
+    colorpickers/QskColorTriangleSkinlet.h
+    colorpickers/QskColorWheel.cpp
+    colorpickers/QskColorWheel.h
+    colorpickers/QskColorWheelSkinlet.cpp
+    colorpickers/QskColorWheelSkinlet.h
+    
+
     Page.h Page.cpp
     main.cpp
 )
