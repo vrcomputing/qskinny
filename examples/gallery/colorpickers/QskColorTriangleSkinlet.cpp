@@ -32,7 +32,7 @@ QRectF QskColorTriangleSkinlet::subControlRect( const QskSkinnable* skinnable,
     {
         const auto rect = subControlRect( skinnable, contentsRect, Q::Triangle );
         const auto size =
-            qMin( q->strutSizeHint( Q::Handle ).width(), q->strutSizeHint( Q::Handle ).height() );
+            qMin( q->strutSizeHint( Q::Handle ).width(), q->strutSizeHint( Q::Handle ).height() ) / 2;
         const auto position = q->effectiveSkinHint( Q::Handle ).toPointF();
         const auto radius = qMin( rect.width(), rect.height() ) / 2;
 

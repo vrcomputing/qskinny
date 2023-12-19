@@ -28,6 +28,12 @@ set(SOURCES
     colorpickers/QskColorWheel.h
     colorpickers/QskColorWheelSkinlet.cpp
     colorpickers/QskColorWheelSkinlet.h
+    colorpickers/QskColorCircle.h
+    colorpickers/QskColorCircle.cpp
+    colorpickers/QskColorCircleSkinlet.h
+    colorpickers/QskColorCircleSkinlet.cpp
+    colorpickers/QskCircleNode.h
+    colorpickers/QskCircleNode.cpp
     
 
     Page.h Page.cpp
