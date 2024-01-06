@@ -150,7 +150,6 @@ void QskColorTriangle::mouseMoveEvent( QMouseEvent* event )
 
             const auto x = qskMapValueRange( event->pos().x(), rect.left(), rect.right(), -1, +1 );
             const auto y = qskMapValueRange( event->pos().y(), rect.top(), rect.bottom(), +1, -1 );
-            qDebug() << x << y;
             setSkinHint( Handle, QPointF{ x, y } );
         }
     }
