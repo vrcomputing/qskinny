@@ -12,6 +12,10 @@ set(SOURCES
     dialog/DialogPage.h dialog/DialogPage.cpp
     listbox/ListBoxPage.h listbox/ListBoxPage.cpp
 
+    colorpickers/QskAlphaSlider.h
+    colorpickers/QskAlphaSlider.cpp
+    colorpickers/QskAlphaSliderSkinlet.h
+    colorpickers/QskAlphaSliderSkinlet.cpp
     colorpickers/ColorPickerPage.cpp
     colorpickers/ColorPickerPage.h
     colorpickers/QskColorRectangle.cpp
