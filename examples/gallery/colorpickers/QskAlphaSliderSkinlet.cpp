@@ -76,11 +76,11 @@ namespace
         void initialize()
         {
             QSGMaterialShader::initialize();
-            m_id_matrix = program()->uniformLocation( "matrix" );
-            m_id_opacity = program()->uniformLocation( "opacity" );
-            m_id_color_a = program()->uniformLocation( "colorA" );
-            m_id_color_b = program()->uniformLocation( "colorB" );
-            m_id_grid_size = program()->uniformLocation( "size" );
+            m_id.matrix = program()->uniformLocation( "matrix" );
+            m_id.opacity = program()->uniformLocation( "opacity" );
+            m_id.color_a = program()->uniformLocation( "colorA" );
+            m_id.color_b = program()->uniformLocation( "colorB" );
+            m_id.grid_size = program()->uniformLocation( "size" );
         }
 
         void updateState(
@@ -90,28 +90,29 @@ namespace
 
             if ( state.isMatrixDirty() )
             {
-                program()->setUniformValue( m_id_matrix, state.combinedMatrix() );
+                program()->setUniformValue( m_id.matrix, state.combinedMatrix() );
             }
 
             if ( state.isOpacityDirty() )
             {
-                program()->setUniformValue( m_id_opacity, state.opacity() );
+                program()->setUniformValue( m_id.opacity, state.opacity() );
             }
 
-            program()->setUniformValue(
-                m_id_color_a, static_cast< const Material* >( newMaterial )->m_colorA );
-            program()->setUniformValue(
-                m_id_color_b, static_cast< const Material* >( newMaterial )->m_colorB );
-            program()->setUniformValue(
-                m_id_grid_size, static_cast< const Material* >( newMaterial )->m_gridSize );
+            const auto* const material = static_cast< const Material* >( newMaterial );
+            program()->setUniformValue( m_id.color_a, material->m_colorA );
+            program()->setUniformValue( m_id.color_b, material->m_colorB );
+            program()->setUniformValue( m_id.grid_size, material->m_gridSize );
         }
 
       private:
-        int m_id_matrix;
-        int m_id_opacity;
-        int m_id_color_a;
-        int m_id_color_b;
-        int m_id_grid_size;
+        struct
+        {
+            int matrix = -1;
+            int opacity = -1;
+            int color_a = -1;
+            int color_b = -1;
+            int grid_size = -1;
+        } m_id;
     };
 
     QSGMaterialShader* Material::createShader() const
@@ -139,6 +140,8 @@ namespace
             m_material.m_colorA = color1;
             m_material.m_colorB = color2;
             m_material.m_gridSize = gridSize;
+            
+            // TODO update only if necessary
 
             m_geometry.markVertexDataDirty();
             markDirty( QSGNode::DirtyMaterial );

@@ -9,5 +9,5 @@ QskAlphaSlider::QskAlphaSlider( QQuickItem* const parent )
     setGradientHint( Fill, {});
     setMetric( Groove | QskAspect::Size, 16 );
     setMetric( Fill | QskAspect::Size, 16 );
-    setMetric( Grid | QskAspect::Size, 4 );
+    setMetric( Grid | QskAspect::Size, 8 );
 }
