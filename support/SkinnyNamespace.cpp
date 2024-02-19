@@ -143,7 +143,7 @@ static bool pluginPath = initPluginPath();
      */
     QGuiApplication::setFont( QFont( "DejaVuSans", 12 ) );
 
-#if ( defined( FONTCONFIG_FILE ) || defined( FONTCONFIG_PATH ) ) && defined( QSK_FONTCONFIG_ASSERT )
+// #if ( defined( FONTCONFIG_FILE ) || defined( FONTCONFIG_PATH ) ) && defined( QSK_FONTCONFIG_ASSERT )
     const QString expected = "Roboto";
     const QString actual = QFontInfo( QFont( expected ) ).family();
     const QString message = QString( "Expected '%1' font to be available but instead got '%2'" )
@@ -151,7 +151,7 @@ static bool pluginPath = initPluginPath();
                                 .arg( actual );
 
     Q_ASSERT_X( actual == expected, __func__, message.toStdString().c_str() );
-#endif
+// #endif
 }
 #endif
 
