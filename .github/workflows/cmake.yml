@@ -380,7 +380,7 @@ jobs:
           QT_DEBUG_PLUGINS: "1"
         run: |
           echo "starting iotdashboard"
-          DYLD_LIBRARY_PATH=./qskinny_install/lib:./qskinny_install/plugins/skins ./qskinny_build/examples/bin/iotdashboard.app/Contents/MacOS/iotdashboard -qwindowgeometry 1024x600+75+100 --screenshot ${{ matrix.config.screenshot_filename }} &
+          DYLD_LIBRARY_PATH=./qskinny_install/lib:./qskinny_install/plugins/skins:./qskinny_build/support ./qskinny_build/examples/bin/iotdashboard.app/Contents/MacOS/iotdashboard -qwindowgeometry 1024x600+75+100 --screenshot ${{ matrix.config.screenshot_filename }} &
           sleep 10
 
       # TODO remove 'qskinny_build\skins\material3\Release' when skin install is fixed
@@ -389,7 +389,7 @@ jobs:
         env:
           QT_DEBUG_PLUGINS: "1"
         run: |
-          $env:Path += ";./qskinny_install/bin;./qskinny_install/lib;./qskinny_install/plugins/skins;./qskinny_build/skins/material3/Release;./qskinny_build/skins/windows/Release;./qskinny_build/skins/squiek/Release"
+          $env:Path += ";./qskinny_install/bin;./qskinny_install/lib;./qskinny_install/plugins/skins;./qskinny_build/skins/material3/Release;./qskinny_build/skins/windows/Release;./qskinny_build/skins/squiek/Release;./qskinny_build/support"
           echo "starting iotdashboard"
           Start-Process qskinny_build\examples\bin\Release\iotdashboard.exe -ArgumentList "-qwindowgeometry 1024x600+0+0 --screenshot ${{ matrix.config.screenshot_filename }}"
           Start-Sleep -Seconds 10

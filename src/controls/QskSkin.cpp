@@ -344,8 +344,16 @@ void QskSkin::completeFontTable()
                 continue;
             }
 
+            #define QFONT_WEIGHT_MIN 1
+            #if QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 )
+            #define QFONT_WEIGHT_MAX 99
+            #else
+            // https://codebrowser.dev/qt6/qtbase/src/gui/text/qfont_p.h.html#34
+            #define QFONT_WEIGHT_MAX 1000
+            #endif
+
             int weight = normalFont.weight() + ( j - 2 ) * 100;
-            weight = qBound( 0, weight, 900 );
+            weight = qBound( QFONT_WEIGHT_MIN, weight, QFONT_WEIGHT_MAX );
 
             auto font = normalFont;
             font.setWeight( static_cast< QFont::Weight >( weight ) );
