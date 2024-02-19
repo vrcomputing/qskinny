@@ -353,7 +353,7 @@ void QskSkin::completeFontTable()
             #endif
 
             int weight = normalFont.weight() + ( j - 2 ) * 100;
-            weight = qBound( 0, weight, 99 );
+            weight = qBound( QFONT_WEIGHT_MIN, weight, QFONT_WEIGHT_MAX );
 
             auto font = normalFont;
             font.setWeight( static_cast< QFont::Weight >( weight ) );
