@@ -85,6 +85,7 @@ static bool pluginPath = initPluginPath();
 #if defined( ENSURE_FONTS )
 
     #include <QFontInfo>
+    #include <iostream>
 
     #if QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 )
         #include <QFontDatabase>
@@ -119,6 +120,8 @@ static bool pluginPath = initPluginPath();
         const char env[] = "FONTCONFIG_FILE";
         if ( !qEnvironmentVariableIsSet( env ) )
             qputenv( env, STRING( FONTCONFIG_FILE ) );
+
+        std::cout << "FONTCONFIG_FILE: " << qgetenv(env).toStdString()  <<'\n';
     }
 #endif
 
@@ -127,6 +130,8 @@ static bool pluginPath = initPluginPath();
         const char env[] = "FONTCONFIG_PATH";
         if ( !qEnvironmentVariableIsSet( env ) )
             qputenv( env, STRING( FONTCONFIG_PATH ) );
+
+        std::cout << "FONTCONFIG_PATH: " << qgetenv(env).toStdString()  <<'\n';
     }
 #endif
 
