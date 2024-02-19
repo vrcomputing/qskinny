@@ -55,7 +55,10 @@ if(HIDE_SYSTEM_FONTS)
         @ONLY NEWLINE_STYLE LF)
 
     target_compile_definitions(${target}
-        PRIVATE FONTCONFIG_FILE=${QSK_FONTCONF_FILE})
+        PRIVATE
+            FONTCONFIG_FILE=${QSK_FONTCONF_FILE}
+            FONTCONFIG_PATH=${QSK_FONTCACHEDIR}
+            QSK_FONTCONFIG_ASSERT)
 endif()
 
 set_target_properties(${target} PROPERTIES FOLDER libs)

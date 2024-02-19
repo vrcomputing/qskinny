@@ -84,6 +84,8 @@ static bool pluginPath = initPluginPath();
 
 #if defined( ENSURE_FONTS )
 
+    #include <QFontInfo>
+
     #if QT_VERSION < QT_VERSION_CHECK( 6, 0, 0 )
         #include <QFontDatabase>
         #include <QElapsedTimer>
@@ -112,20 +114,41 @@ static bool pluginPath = initPluginPath();
         if ( !qobject_cast< QGuiApplication* >( qApp ) )
             return; // no fonts needed
 
-    #ifdef FONTCONFIG_FILE
+#ifdef FONTCONFIG_FILE
+    {
         const char env[] = "FONTCONFIG_FILE";
         if ( !qEnvironmentVariableIsSet( env ) )
             qputenv( env, STRING( FONTCONFIG_FILE ) );
-    #endif
-
-        preloadFonts();
-
-        /*
-            The default initialization in QskSkin sets up its font table
-            with using the application font for the default font role.
-         */
-        QGuiApplication::setFont( QFont( "DejaVuSans", 12 ) );
     }
+#endif
+
+#ifdef FONTCONFIG_PATH
+    {
+        const char env[] = "FONTCONFIG_PATH";
+        if ( !qEnvironmentVariableIsSet( env ) )
+            qputenv( env, STRING( FONTCONFIG_PATH ) );
+    }
+#endif
+
+    preloadFonts();
+
+    /*
+        The default initialization in QskSkin sets up its font table
+        with using the application font for the default font role.
+     */
+    QGuiApplication::setFont( QFont( "DejaVuSans", 12 ) );
+
+#if ( defined( FONTCONFIG_FILE ) || defined( FONTCONFIG_PATH ) ) && defined( QSK_FONTCONFIG_ASSERT )
+    const std::string expected = "Roboto";
+    const std::string actual = QFontInfo( QFont( "Roboto" ) ).family().toStdString();
+    const std::string message = QString( "Expected '%1' font to be available but instead got '%2'" )
+                                    .arg( expected.c_str() )
+                                    .arg( actual.c_str() )
+                                    .toStdString();
+
+    Q_ASSERT_X( actual == expected, __func__, message.c_str() );
+#endif
+}
 #endif
 
 Q_COREAPP_STARTUP_FUNCTION( initFonts )
