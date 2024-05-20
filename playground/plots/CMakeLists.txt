@@ -20,3 +20,5 @@ list(APPEND SOURCES PlotCursor.cpp PlotCursorSkinlet.cpp)
 
 qsk_add_example(plots ${SOURCES} ${HEADERS}
     PlotSkin.h PlotSkin.cpp Plot.h Plot.cpp main.cpp )
+
+target_link_libraries(plots PRIVATE Qt::ShaderTools)
