@@ -451,18 +451,18 @@ jobs:
         shell: bash
         run: cmake --build qskinny_build_test --config ${{ matrix.config.build_type }}
 
-      # - name: Pack
-      #   shell: bash
-      #   working-directory: instdir
-      #   run: |
-      #     ls -laR
-      #     ${{ matrix.config.archiver }} ../${{ matrix.config.artifact }} .
+      - name: Pack
+        shell: bash
+        working-directory: ./qskinny_install
+        run: |
+          ls -laR
+          ${{ matrix.config.archiver }} ../${{ matrix.config.artifact }} .
       
-      # - name: Upload
-      #   uses: actions/upload-artifact@v1
-      #   with:
-      #     path: ./${{ matrix.config.artifact }}
-      #     name: ${{ matrix.config.artifact }}
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          path: ./${{ matrix.config.artifact }}
+          name: ${{ matrix.config.artifact }}
 
       # - name: Upload release asset
       #   if: github.event_name == 'release' && (github.event.action == 'published' || github.event.action == 'created')
