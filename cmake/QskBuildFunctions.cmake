@@ -92,8 +92,6 @@ function(qsk_add_example target)
     set_target_properties(${target} PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../bin )
 
-    set_target_properties(${target} PROPERTIES UNITY_BUILD OFF)
-
     target_link_libraries(${target} PRIVATE qskinny )
 
     # not all examples need this one. TODO ...

@@ -39,4 +39,3 @@ if(ENABLE_ENSURE_SKINS)
 endif()
 
 set_target_properties(${target} PROPERTIES FOLDER libs)
-set_target_properties(${target} PROPERTIES UNITY_BUILD OFF)

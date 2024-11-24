@@ -537,7 +537,9 @@ set_target_properties(${target} PROPERTIES EXPORT_NAME ${PROJECT_NAME})
 set_target_properties(${target} PROPERTIES
     VERSION ${CMAKE_PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR} )
 
-set_target_properties(${target} PROPERTIES UNITY_BUILD ON)
+if(BUILD_UNITY)
+    set_target_properties(${target} PROPERTIES UNITY_BUILD ON)
+endif()
 
 # packaging
 set(PACKAGE_NAME ${PROJECT_NAME})

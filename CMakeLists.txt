@@ -5,11 +5,6 @@
 
 cmake_minimum_required(VERSION 3.16.3)
 
-option(BUILD_UNITY "Enable unity builds" ON)
-if(BUILD_UNITY)
-    set(CMAKE_UNITY_BUILD ON)
-endif()
-
 macro(qsk_setup_options)
 
     option(BUILD_PEDANTIC     "Enable pedantic compile flags ( only GNU/CLANG )" OFF)
@@ -20,6 +15,8 @@ macro(qsk_setup_options)
     option(BUILD_INPUTCONTEXT "Build virtual keyboard support" ON)
     option(BUILD_EXAMPLES     "Build qskinny examples" ON)
     option(BUILD_PLAYGROUND   "Build qskinny playground" ON)
+
+    option(BUILD_UNITY "Enable unity builds" ON)
 
     # we actually want to use cmake_dependent_option - minimum cmake version ??
 
