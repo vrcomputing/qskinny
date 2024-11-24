@@ -5,12 +5,10 @@
 
 cmake_minimum_required(VERSION 3.16.3)
 
-find_program(CLANG_TIDY "clang-tidy") # REQUIRED
-if(CLANG_TIDY)
-    execute_process(COMMAND ${CLANG_TIDY} --version)
+option(BUILD_CLANG_TIDY "Enable usage of clang-tidy" OFF)
+if(BUILD_CLANG_TIDY)
+    find_program(CLANG_TIDY "clang-tidy" REQUIRED)
     set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-extra-arg=-Wno-unknown-warning-option")
-else()
-    message(WARNING "Could NOT find program 'clang-tidy'!")
 endif()
 
 macro(qsk_setup_options)
@@ -179,7 +177,7 @@ if(BUILD_PLAYGROUND)
     add_subdirectory(playground)
 endif()
 
-if(CLANG_TIDY)
+if(BUILD_CLANG_TIDY)
     file(GLOB_RECURSE EXAMPLE_FILES
         ${CMAKE_CURRENT_LIST_DIR}/examples/*.h
         ${CMAKE_CURRENT_LIST_DIR}/examples/*.hpp
