@@ -9,7 +9,7 @@
 
 #include <QskGridBox.h>
 
-namespace
+namespace ArcPageImpl
 {
     class ControlPanel : public QskGridBox
     {
@@ -100,10 +100,10 @@ namespace
 ArcPage::ArcPage( QQuickItem* parent )
     : QskLinearBox( Qt::Vertical, parent )
 {
-    auto arc = new Arc();
+    auto arc = new ArcPageImpl::Arc();
     arc->setMargins( 40 ); // some extra space for testing the offsets
 
-    auto panel = new ControlPanel( arc );
+    auto panel = new ArcPageImpl::ControlPanel( arc );
     panel->setSizePolicy( Qt::Vertical, QskSizePolicy::Fixed );
 
     addItem( panel );
