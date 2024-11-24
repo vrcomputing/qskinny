@@ -1,0 +1,18 @@
+---
+Checks:          '-*,clang-analyzer-core*,clang-analyzer-cplusplus*,cppcoreguidelines-*,bugprone-*,readability-*,performance-*,modernize-*,misc-*,-bugprone-suspicious-include,-readability-identifier-length,-modernize-use-trailing-return-type,-readability-braces-around-statements'
+WarningsAsErrors: ''
+HeaderFileExtensions:
+  - ''
+  - h
+  - hh
+  - hpp
+  - hxx
+ImplementationFileExtensions:
+  - c
+  - cc
+  - cpp
+  - cxx
+HeaderFilterRegex: '.*'
+SystemHeaders:   false
+...
+

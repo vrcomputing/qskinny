@@ -5,6 +5,14 @@
 
 cmake_minimum_required(VERSION 3.16.3)
 
+find_program(CLANG_TIDY "clang-tidy") # REQUIRED
+if(CLANG_TIDY)
+    execute_process(COMMAND ${CLANG_TIDY} --version)
+    set(CMAKE_CXX_CLANG_TIDY "clang-tidy;-extra-arg=-Wno-unknown-warning-option")
+else()
+    message(WARNING "Could NOT find program 'clang-tidy'!")
+endif()
+
 macro(qsk_setup_options)
 
     option(BUILD_PEDANTIC     "Enable pedantic compile flags ( only GNU/CLANG )" OFF)
@@ -81,7 +89,7 @@ endmacro()
 ############################################################################
 
 project(QSkinny
-    LANGUAGES C CXX 
+    LANGUAGES C CXX
     HOMEPAGE_URL "https://github.com/uwerat/qskinny"
     VERSION 0.8.0)
 
@@ -169,4 +177,19 @@ endif()
 
 if(BUILD_PLAYGROUND)
     add_subdirectory(playground)
+endif()
+
+if(CLANG_TIDY)
+    file(GLOB_RECURSE EXAMPLE_FILES
+        ${CMAKE_CURRENT_LIST_DIR}/examples/*.h
+        ${CMAKE_CURRENT_LIST_DIR}/examples/*.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/examples/*.c
+        ${CMAKE_CURRENT_LIST_DIR}/examples/*.cpp
+        ${CMAKE_CURRENT_LIST_DIR}/playground/*.h
+        ${CMAKE_CURRENT_LIST_DIR}/playground/*.hpp
+        ${CMAKE_CURRENT_LIST_DIR}/playground/*.c
+        ${CMAKE_CURRENT_LIST_DIR}/playground/*.cpp
+    )
+
+    set_source_files_properties(${EXAMPLE_FILES} PROPERTIES SKIP_LINTING ON)
 endif()
