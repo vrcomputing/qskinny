@@ -100,10 +100,78 @@ set(CPLUSPLUS20_HEADERS
     <semaphore>
 )
 
+set(QSK_QT_HEADERS
+    <QApplication>
+    <QBrush>
+    <QByteArray>
+    <QColor>
+    <QCoreApplication>
+    <QDebug>
+    <QDir>
+    <QDoubleValidator>
+    <QElapsedTimer>
+    <QEvent>
+    <QFile>
+    <QFont>
+    <QFontDatabase>
+    <QFontMetrics>
+    <QFontMetricsF>
+    <QGraphicsGridLayout>
+    <QGraphicsScene>
+    <QGraphicsView>
+    <QGraphicsWidget>
+    <QGridLayout>
+    <QGuiApplication>
+    <QImage>
+    <QKeySequence>
+    <QLabel>
+    <QLineF>
+    <QListWidget>
+    <QLocale>
+    <QMetaMethod>
+    <QMetaProperty>
+    <QMetaType>
+    <QObject>
+    <QPainter>
+    <QPainterPath>
+    <QPen>
+    <QPointer>
+    <QPolygonF>
+    <QQmlApplicationEngine>
+    <QQuickFramebufferObject>
+    <QQuickItem>
+    <QQuickWidget>
+    <QQuickWindow>
+    <QRectF>
+    <QSGFlatColorMaterial>
+    <QSGGeometryNode>
+    <QSGMaterialRhiShader>
+    <QSGNode>
+    <QSize>
+    <QStringList>
+    <QSvgRenderer>
+    <Qt>
+    <QThread>
+    <QTime>
+    <QTimer>
+    <QtMath>
+    <QtQml>
+    <QTransform>
+    <QUrl>
+    <QVariant>
+    <QVector>
+    <QWidget>
+)
+
+if(QT_VERSION_MAJOR VERSION_GREATER_EQUAL 6)
+    list(REMOVE_ITEM QSK_QT_HEADERS <QSGMaterialRhiShader>)
+endif()
+
 set(ALL_STANDARD_HEADERS
     ${C_STANDARD_HEADERS}
     ${CPLUSPLUS_STANDARD_HEADERS}
     # ${CPLUSPLUS20_HEADERS}
+    ${QSK_QT_HEADERS}
 )
 
 file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/pch.cpp "enum {};")
@@ -120,7 +188,34 @@ if(MSVC)
         /Zc:externC
         /Zc:externConstexpr
         /permissive-
-        /source-charset:utf-8
-        /execution-charset:utf-8
+        #/source-charset:utf-8
+        #/execution-charset:utf-8
+        /utf-8
     )
+endif()
+
+target_link_libraries(PCH PRIVATE
+    Qt::Core
+    Qt::CorePrivate
+    Qt::Gui
+    Qt::GuiPrivate
+    Qt::OpenGL
+    Qt::OpenGLPrivate
+    Qt::Quick
+    Qt::QuickPrivate
+    Qt::QuickShapesPrivate
+    Qt::QuickWidgets
+    Qt::Svg)
+
+if(TARGET Qt::WebEngine)
+    target_link_libraries(PCH PRIVATE Qt::WebEngine)
+endif()
+if(TARGET Qt::WebEngineCore)
+    target_link_libraries(PCH PRIVATE Qt::WebEngineCore)
+endif()
+if(TARGET Qt::WebEngineQuick)
+    target_link_libraries(PCH PRIVATE Qt::WebEngineQuick)
+endif()
+if(TARGET Qt::WebEngineQuickPrivate)
+    target_link_libraries(PCH PRIVATE Qt::WebEngineQuickPrivate)
 endif()
