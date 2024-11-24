@@ -16,6 +16,8 @@ macro(qsk_setup_options)
     option(BUILD_EXAMPLES     "Build qskinny examples" ON)
     option(BUILD_PLAYGROUND   "Build qskinny playground" ON)
 
+    option(BUILD_WITH_PRECOMPILED_HEADERS   "Build qskinny with precompiled headers" ON)
+
     # we actually want to use cmake_dependent_option - minimum cmake version ??
 
     option( BUILD_SVG2QVG_STANDALONE "Build svg2qvg without qskinny library dependency" ON )
@@ -81,7 +83,7 @@ endmacro()
 ############################################################################
 
 project(QSkinny
-    LANGUAGES C CXX 
+    LANGUAGES C CXX
     HOMEPAGE_URL "https://github.com/uwerat/qskinny"
     VERSION 0.8.0)
 
@@ -102,6 +104,10 @@ include("QskBuildFunctions")
 qsk_setup_Qt()
 qsk_setup_build()
 qsk_setup_install()
+
+if(BUILD_WITH_PRECOMPILED_HEADERS)
+include("QskPreCompiledHeader")
+endif()
 
 add_subdirectory(src)
 add_subdirectory(designsystems)
