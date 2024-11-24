@@ -163,6 +163,10 @@ set(QSK_QT_HEADERS
     <QWidget>
 )
 
+if(TRUE) # build break on gcc
+    list(REMOVE_ITEM CPLUSPLUS_STANDARD_HEADERS <execution>)
+endif()
+
 if(QT_VERSION_MAJOR VERSION_GREATER_EQUAL 6)
     list(REMOVE_ITEM QSK_QT_HEADERS <QSGMaterialRhiShader>)
 endif()
