@@ -167,7 +167,7 @@ if(TRUE) # build break on gcc
     list(REMOVE_ITEM CPLUSPLUS_STANDARD_HEADERS <execution>)
 endif()
 
-if(NOT TARGET Qt::Widgets)
+if(TRUE) # NOT TARGET Qt::Widgets
     list(REMOVE_ITEM QSK_QT_HEADERS <QApplication>)
     list(REMOVE_ITEM QSK_QT_HEADERS <QGraphicsWidget>)
     list(REMOVE_ITEM QSK_QT_HEADERS <QWidget>)
