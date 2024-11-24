@@ -10,7 +10,7 @@
 #include <QGraphicsScene>
 #include <QDebug>
 
-namespace
+namespace GridGraphicsImpl
 {
     class Rectangle : public QGraphicsWidget
     {
@@ -68,7 +68,7 @@ GridGraphics::GridGraphics( QWidget* parent )
     setHorizontalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
     setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOff );
 
-    auto grid = new Grid();
+    auto grid = new GridGraphicsImpl::Grid();
 
     m_layout = new QGraphicsGridLayout( grid );
     m_layout->setSpacing( 5 );
@@ -86,7 +86,7 @@ GridGraphics::~GridGraphics()
 void GridGraphics::insert( const QByteArray& colorName,
     int row, int column, int rowSpan, int columnSpan )
 {
-    m_layout->addItem( new Rectangle( colorName ),
+    m_layout->addItem( new GridGraphicsImpl::Rectangle( colorName ),
         row, column, rowSpan, columnSpan );
 }
 
