@@ -184,6 +184,10 @@ if(NOT TARGET Qt::QuickWidgets)
     list(REMOVE_ITEM QSK_QT_HEADERS <QQuickWidget>)
 endif()
 
+if(NOT TARGET Qt::Svg)
+    list(REMOVE_ITEM QSK_QT_HEADERS <QSvgRenderer>)
+endif()
+
 if(QT_VERSION_MAJOR VERSION_GREATER_EQUAL 6)
     list(REMOVE_ITEM QSK_QT_HEADERS <QSGMaterialRhiShader>)
 endif()
