@@ -195,17 +195,17 @@ set_target_properties(PCH PROPERTIES AUTOMOC OFF AUTOUIC OFF AUTORCC OFF)
 if(MSVC)
     # TODO check why we need this
     # Set the desired compiler options
-    target_compile_options(PCH PRIVATE
-        /Zc:referenceBinding
-        /Zc:__cplusplus
-        /Zc:hiddenFriend
-        /Zc:externC
-        /Zc:externConstexpr
-        /permissive-
-        #/source-charset:utf-8
-        #/execution-charset:utf-8
-        /utf-8
-    )
+    # target_compile_options(PCH PRIVATE
+    #     /Zc:referenceBinding
+    #     /Zc:__cplusplus
+    #     /Zc:hiddenFriend
+    #     /Zc:externC
+    #     /Zc:externConstexpr
+    #     /permissive-
+    #     #/source-charset:utf-8
+    #     #/execution-charset:utf-8
+    #     /utf-8
+    # )
 endif()
 
 target_link_libraries(PCH PRIVATE
