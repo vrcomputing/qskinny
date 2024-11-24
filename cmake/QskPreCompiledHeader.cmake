@@ -204,16 +204,22 @@ target_link_libraries(PCH PRIVATE
     Qt::Gui
     Qt::GuiPrivate
     Qt::Quick
-    Qt::QuickPrivate
-    Qt::QuickShapesPrivate
-    Qt::QuickWidgets
-    Qt::Svg)
+    Qt::QuickPrivate)
 
 if(TARGET Qt::OpenGL)
     target_link_libraries(PCH PRIVATE Qt::OpenGL)
 endif()
 if(TARGET Qt::OpenGLPrivate)
     target_link_libraries(PCH PRIVATE Qt::OpenGLPrivate)
+endif()
+if(TARGET Qt::Svg)
+    target_link_libraries(PCH PRIVATE Qt::Svg)
+endif()
+if(TARGET Qt::QuickShapesPrivate)
+    target_link_libraries(PCH PRIVATE Qt::QuickShapesPrivate)
+endif()
+if(TARGET Qt::QuickWidgets)
+    target_link_libraries(PCH PRIVATE Qt::QuickWidgets)
 endif()
 if(TARGET Qt::WebEngine)
     target_link_libraries(PCH PRIVATE Qt::WebEngine)
