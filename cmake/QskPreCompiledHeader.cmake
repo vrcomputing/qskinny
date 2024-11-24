@@ -188,6 +188,10 @@ if(TRUE) # NOT TARGET Qt::Svg
     list(REMOVE_ITEM QSK_QT_HEADERS <QSvgRenderer>)
 endif()
 
+if(TRUE) # NOT TARGET Qt::Qml
+    list(REMOVE_ITEM QSK_QT_HEADERS <QQmlApplicationEngine>)
+endif()
+
 if(QT_VERSION_MAJOR VERSION_GREATER_EQUAL 6)
     list(REMOVE_ITEM QSK_QT_HEADERS <QSGMaterialRhiShader>)
 endif()
