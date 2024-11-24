@@ -184,7 +184,7 @@ if(NOT TARGET Qt::QuickWidgets)
     list(REMOVE_ITEM QSK_QT_HEADERS <QQuickWidget>)
 endif()
 
-if(NOT TARGET Qt::Svg)
+if(TRUE) # NOT TARGET Qt::Svg
     list(REMOVE_ITEM QSK_QT_HEADERS <QSvgRenderer>)
 endif()
 
