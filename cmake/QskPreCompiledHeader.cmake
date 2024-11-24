@@ -168,13 +168,13 @@ if(TRUE) # build break on gcc
 endif()
 
 if(NOT TARGET Qt::Widgets)
-    list(REMOVE_ITEM CPLUSPLUS_STANDARD_HEADERS <QApplication>)
-    list(REMOVE_ITEM CPLUSPLUS_STANDARD_HEADERS <QGraphicsWidget>)
-    list(REMOVE_ITEM CPLUSPLUS_STANDARD_HEADERS <QWidget>)
+    list(REMOVE_ITEM QSK_QT_HEADERS <QApplication>)
+    list(REMOVE_ITEM QSK_QT_HEADERS <QGraphicsWidget>)
+    list(REMOVE_ITEM QSK_QT_HEADERS <QWidget>)
 endif()
 
 if(NOT TARGET Qt::QuickWidgets)
-    list(REMOVE_ITEM CPLUSPLUS_STANDARD_HEADERS <QQuickWidget>)
+    list(REMOVE_ITEM QSK_QT_HEADERS <QQuickWidget>)
 endif()
 
 if(QT_VERSION_MAJOR VERSION_GREATER_EQUAL 6)
