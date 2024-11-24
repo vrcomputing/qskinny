@@ -177,9 +177,9 @@ if(BUILD_PLAYGROUND)
 endif()
 
 if(BUILD_UNITY)
-    file(GLOB_RECURSE MOC_FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/moc_*.cpp
+    file(GLOB_RECURSE CPP_FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/*.cpp
     )
 
-    set_source_files_properties(${MOC_FILES} PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
+    set_source_files_properties(${CPP_FILES} PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 endif()
