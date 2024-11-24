@@ -34,22 +34,22 @@ static int qskRenderOrderCompare( const QSGNode* rootNode,
 {
     if ( rootNode == node1 )
         return 1;
-            
+
     if ( rootNode == node2 )
         return -1;
 
     for ( auto node = rootNode->firstChild();
         node != nullptr; node = node->nextSibling() )
-    {   
+    {
         const auto ret = qskRenderOrderCompare( node, node1, node2 );
-        if ( ret ) 
+        if ( ret )
             return ret;
-    }       
-    
-    return 0;
-}   
+    }
 
-namespace
+    return 0;
+}
+
+namespace QskSceneTextureImpl
 {
 #if QT_VERSION >= QT_VERSION_CHECK( 6, 0, 0 )
     inline QSGRendererInterface::RenderMode contextRenderMode(
@@ -244,7 +244,7 @@ namespace
             the texture has already  been updated. In these situations we
             update the texture twice. Not so good ...
          */
-        if ( qskRenderOrderCompare( rootNode(), node, m_finalNode ) > 0 ) 
+        if ( qskRenderOrderCompare( rootNode(), node, m_finalNode ) > 0 )
         {
             // triggering QSGRenderer::sceneGraphChanged signals
             Inherited::nodeChanged( node, state );
@@ -389,7 +389,7 @@ class QskSceneTexturePrivate final : public QSGTexturePrivate
     QRectF rect;
     const qreal devicePixelRatio;
 
-    Renderer* renderer = nullptr;
+    QskSceneTextureImpl::Renderer* renderer = nullptr;
     QSGDefaultRenderContext* context = nullptr;
 };
 
@@ -419,7 +419,7 @@ void QskSceneTexture::render( const QSGRootNode* rootNode,
 
     if ( d->renderer == nullptr )
     {
-        d->renderer = new Renderer( this, d->context );
+        d->renderer = new QskSceneTextureImpl::Renderer( this, d->context );
         d->renderer->setDevicePixelRatio( d->devicePixelRatio );
     }
 

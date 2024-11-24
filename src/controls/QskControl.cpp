@@ -26,11 +26,14 @@ QSK_SYSTEM_STATE( QskControl, Disabled, QskAspect::FirstSystemState )
 QSK_SYSTEM_STATE( QskControl, Hovered, QskAspect::LastSystemState >> 1 )
 QSK_SYSTEM_STATE( QskControl, Focused, QskAspect::LastSystemState )
 
+#ifndef __qskSendEventTo
+#define __qskSendEventTo
 static inline void qskSendEventTo( QObject* object, QEvent::Type type )
 {
     QEvent event( type );
     QCoreApplication::sendEvent( object, &event );
 }
+#endif
 
 static inline bool qskMaybeGesture( QQuickItem* item,
     const QQuickItem* child, const QEvent* event )

@@ -537,6 +537,8 @@ set_target_properties(${target} PROPERTIES EXPORT_NAME ${PROJECT_NAME})
 set_target_properties(${target} PROPERTIES
     VERSION ${CMAKE_PROJECT_VERSION} SOVERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR} )
 
+set_target_properties(${target} PROPERTIES UNITY_BUILD ON)
+
 # packaging
 set(PACKAGE_NAME ${PROJECT_NAME})
 
@@ -568,7 +570,7 @@ install(EXPORT ${PACKAGE_NAME}Targets
         ${PACKAGE_LOCATION})
 
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    install(FILES $<TARGET_PDB_FILE:${target}> 
-        DESTINATION 
+    install(FILES $<TARGET_PDB_FILE:${target}>
+        DESTINATION
             ${QSK_INSTALL_LIBS} OPTIONAL)
 endif()

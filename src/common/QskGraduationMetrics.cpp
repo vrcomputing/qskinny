@@ -17,11 +17,13 @@ static void qskRegisterGraduationMetrics()
 
 Q_CONSTRUCTOR_FUNCTION( qskRegisterGraduationMetrics )
 
+#ifndef __qskInterpolated
+#define __qskInterpolated
 static inline qreal qskInterpolated( qreal from, qreal to, qreal ratio )
 {
     return from + ( to - from ) * ratio;
 }
-
+#endif
 QskGraduationMetrics QskGraduationMetrics::interpolated(
     const QskGraduationMetrics& to, const qreal ratio ) const noexcept
 {

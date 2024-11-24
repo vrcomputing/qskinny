@@ -8,10 +8,13 @@
 
 namespace
 {
+    #ifndef __rgbGray
+    #define __rgbGray
     inline constexpr QRgb rgbGray( int value, qreal opacity = 1.0 )
     {
         return qRgba( value, value, value, qRound( opacity * 255 ) );
     }
+    #endif
 }
 
 QskFluent2Theme::QskFluent2Theme( QskSkin::ColorScheme colorScheme,

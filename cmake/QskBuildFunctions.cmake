@@ -9,7 +9,7 @@ function(qsk_add_executable target)
         qt6_add_executable(${ARGV})
 
         # we manually export our APIs to QML - might change in the future
-        set_target_properties(${target} PROPERTIES 
+        set_target_properties(${target} PROPERTIES
             QT_QML_MODULE_NO_IMPORT_SCAN 1)
     else()
         add_executable(${ARGV})
@@ -92,6 +92,8 @@ function(qsk_add_example target)
     set_target_properties(${target} PROPERTIES
         RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/../bin )
 
+    set_target_properties(${target} PROPERTIES UNITY_BUILD OFF)
+
     target_link_libraries(${target} PRIVATE qskinny )
 
     # not all examples need this one. TODO ...
@@ -105,7 +107,7 @@ function(qsk_add_example target)
         target_link_libraries(${target} PRIVATE qskqmlexport)
     endif()
 
-    # for examples with subdirectories 
+    # for examples with subdirectories
     target_include_directories(${target} PRIVATE ${CMAKE_CURRENT_LIST_DIR})
 
 endfunction()

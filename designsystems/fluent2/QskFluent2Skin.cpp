@@ -145,10 +145,13 @@ namespace
         return static_cast< double >( value );
     }
 
+    #ifndef __rgbGray
+    #define __rgbGray
     inline constexpr QRgb rgbGray( int value, qreal opacity = 1.0 )
     {
         return qRgba( value, value, value, qRound( opacity * 255 ) );
     }
+    #endif
 
     /*
         When application code is manipulating base colors manually the colors of

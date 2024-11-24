@@ -16,7 +16,7 @@
 #include "QskBoxShapeMetrics.h"
 #include "QskRgbValue.h"
 
-namespace
+namespace QskBoxNodeImpl
 {
     enum Role
     {
@@ -25,31 +25,31 @@ namespace
         BoxRole,
         FillRole
     };
-}
 
-static void qskUpdateChildren( QSGNode* parentNode, quint8 role, QSGNode* node )
-{
-    static const QVector< quint8 > roles =
-        { ShadowRole, ShadowFillRole, BoxRole, FillRole };
-
-    auto oldNode = QskSGNode::findChildNode( parentNode, role );
-    QskSGNode::replaceChildNode( roles, role, parentNode, oldNode, node );
-}
-
-template< typename Node >
-static inline Node* qskNode( QSGNode* parentNode, quint8 role )
-{
-    using namespace QskSGNode;
-
-    auto node = static_cast< Node* > ( findChildNode( parentNode, role ) );
-
-    if ( node == nullptr )
+    static void qskUpdateChildren( QSGNode* parentNode, quint8 role, QSGNode* node )
     {
-        node = new Node();
-        setNodeRole( node, role );
+        static const QVector< quint8 > roles =
+            { QskBoxNodeImpl::ShadowRole, QskBoxNodeImpl::ShadowFillRole, QskBoxNodeImpl::BoxRole, QskBoxNodeImpl::BoxRole };
+
+        auto oldNode = QskSGNode::findChildNode( parentNode, role );
+        QskSGNode::replaceChildNode( roles, role, parentNode, oldNode, node );
     }
 
-    return node;
+    template< typename Node >
+    static inline Node* qskNode( QSGNode* parentNode, quint8 role )
+    {
+        using namespace QskSGNode;
+
+        auto node = static_cast< Node* > ( findChildNode( parentNode, role ) );
+
+        if ( node == nullptr )
+        {
+            node = new Node();
+            setNodeRole( node, role );
+        }
+
+        return node;
+    }
 }
 
 QskBoxNode::QskBoxNode()
@@ -99,13 +99,13 @@ void QskBoxNode::updateNode( const QQuickWindow* window, const QRectF& rect,
             if ( shadow.blurRadius() <= 0.0 )
             {
                 // QskBoxRectangleNode allows scene graph batching
-                shadowFillNode = qskNode< QskBoxRectangleNode >( this, ShadowFillRole );
+                shadowFillNode = QskBoxNodeImpl::qskNode< QskBoxRectangleNode >( this, QskBoxNodeImpl::ShadowFillRole );
                 shadowFillNode->updateFilling( window,
                     shadowRect, shadowShape, shadowColor );
             }
             else
             {
-                shadowNode = qskNode< QskBoxShadowNode >( this, ShadowRole );
+                shadowNode = QskBoxNodeImpl::qskNode< QskBoxShadowNode >( this, QskBoxNodeImpl::ShadowRole );
                 shadowNode->setShadowData( shadowRect,
                     shadowShape, shadow.blurRadius(), shadowColor );
             }
@@ -113,7 +113,7 @@ void QskBoxNode::updateNode( const QQuickWindow* window, const QRectF& rect,
 
         if ( hasBorder || hasFilling )
         {
-            rectNode = qskNode< QskBoxRectangleNode >( this, BoxRole );
+            rectNode = QskBoxNodeImpl::qskNode< QskBoxRectangleNode >( this, QskBoxNodeImpl::BoxRole );
 
             if ( hasBorder && hasFilling )
             {
@@ -121,7 +121,7 @@ void QskBoxNode::updateNode( const QQuickWindow* window, const QRectF& rect,
                     && QskBoxRectangleNode::isCombinedGeometrySupported( gradient );
 
                 if ( !doCombine )
-                    fillNode = qskNode< QskBoxRectangleNode >( this, FillRole );
+                    fillNode = QskBoxNodeImpl::qskNode< QskBoxRectangleNode >( this, QskBoxNodeImpl::BoxRole );
             }
 
             if ( fillNode )
@@ -140,8 +140,8 @@ void QskBoxNode::updateNode( const QQuickWindow* window, const QRectF& rect,
         }
     }
 
-    qskUpdateChildren( this, ShadowRole, shadowNode );
-    qskUpdateChildren( this, ShadowFillRole, shadowFillNode );
-    qskUpdateChildren( this, BoxRole, rectNode );
-    qskUpdateChildren( this, FillRole, fillNode );
+    QskBoxNodeImpl::qskUpdateChildren( this, QskBoxNodeImpl::ShadowRole, shadowNode );
+    QskBoxNodeImpl::qskUpdateChildren( this, QskBoxNodeImpl::ShadowFillRole, shadowFillNode );
+    QskBoxNodeImpl::qskUpdateChildren( this, QskBoxNodeImpl::BoxRole, rectNode );
+    QskBoxNodeImpl::qskUpdateChildren( this, QskBoxNodeImpl::BoxRole, fillNode );
 }

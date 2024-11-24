@@ -10,6 +10,8 @@
 #include <qdebug.h>
 #include <algorithm>
 
+#ifndef __qskSetItemActive
+#define __qskSetItemActive
 static void qskSetItemActive( QObject* receiver, const QQuickItem* item, bool on )
 {
     /*
@@ -38,6 +40,7 @@ static void qskSetItemActive( QObject* receiver, const QQuickItem* item, bool on
         QObject::disconnect( item, &QQuickItem::implicitHeightChanged, receiver, nullptr );
     }
 }
+#endif
 
 static void qskUpdateFocusChain(
     QskGridBox* box, const QskGridLayoutEngine* engine,

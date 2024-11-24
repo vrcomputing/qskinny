@@ -39,11 +39,14 @@ QSK_QT_PRIVATE_END
 
 #include <unordered_set>
 
+#ifndef __qskSendEventTo
+#define __qskSendEventTo
 static inline void qskSendEventTo( QObject* object, QEvent::Type type )
 {
     QEvent event( type );
     QCoreApplication::sendEvent( object, &event );
 }
+#endif
 
 static inline void qskApplyUpdateFlags(
     QskItem::UpdateFlags flags, QskItem* item )

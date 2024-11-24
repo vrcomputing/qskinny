@@ -22,7 +22,7 @@ static inline const QskSimpleListBox* qskListBox(
     return qobject_cast< QskSimpleListBox* >( subWindow->contentItem() );
 }
 
-namespace
+namespace QskSelectionSubWindowImpl
 {
     class ListBox final : public QskSimpleListBox
     {
@@ -46,7 +46,7 @@ namespace
 QskSelectionSubWindow::QskSelectionSubWindow( QQuickItem* parent )
     : Inherited( parent )
 {
-    auto listBox = new ListBox( this );
+    auto listBox = new QskSelectionSubWindowImpl::ListBox( this );
 #if 1
     listBox->setPreferredSize( 500, 500 );
 #endif

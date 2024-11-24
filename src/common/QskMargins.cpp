@@ -23,10 +23,13 @@ static void qskRegisterMargins()
 
 Q_CONSTRUCTOR_FUNCTION( qskRegisterMargins )
 
+#ifndef __qskInterpolated
+#define __qskInterpolated
 static inline qreal qskInterpolated( qreal from, qreal to, qreal ratio )
 {
     return from + ( to - from ) * ratio;
 }
+#endif
 
 static inline QskMargins qskInterpolateMargins(
     const QskMargins& m1, const QskMargins& m2, qreal progress )

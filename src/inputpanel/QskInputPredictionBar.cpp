@@ -15,7 +15,7 @@ QSK_SUBCONTROL( QskInputPredictionBar, Panel )
 QSK_SUBCONTROL( QskInputPredictionBar, ButtonPanel )
 QSK_SUBCONTROL( QskInputPredictionBar, ButtonText )
 
-namespace
+namespace QskInputPredictionBarImpl
 {
     class Button final : public QskPushButton
     {
@@ -78,7 +78,7 @@ QskInputPredictionBar::QskInputPredictionBar( QQuickItem* parent )
 
     for ( int i = 0; i < m_data->buttonCount; i++ )
     {
-        auto button = new Button( m_data->layoutBox );
+        auto button = new QskInputPredictionBarImpl::Button( m_data->layoutBox );
         button->setVisible( false );
         button->setSizePolicy( Qt::Horizontal, QskSizePolicy::Maximum );
 

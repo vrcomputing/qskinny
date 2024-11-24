@@ -7,11 +7,14 @@
 #include "QskTreeNode.h"
 #include "QskSetup.h"
 
+#ifndef __qskSendEventTo
+#define __qskSendEventTo
 static inline void qskSendEventTo( QObject* object, QEvent::Type type )
 {
     QEvent event( type );
     QCoreApplication::sendEvent( object, &event );
 }
+#endif
 
 QskItemPrivate::QskItemPrivate()
     : updateFlags( QskSetup::updateFlags() )

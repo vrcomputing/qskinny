@@ -20,10 +20,13 @@ static void qskRegisterShadowMetrics()
 
 Q_CONSTRUCTOR_FUNCTION( qskRegisterShadowMetrics )
 
+#ifndef __qskInterpolated
+#define __qskInterpolated
 static inline qreal qskInterpolated( qreal from, qreal to, qreal ratio )
 {
     return from + ( to - from ) * ratio;
 }
+#endif
 
 static inline qreal qskToAbsolute( qreal length, qreal percentage )
 {

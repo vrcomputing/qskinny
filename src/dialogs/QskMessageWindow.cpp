@@ -7,7 +7,7 @@
 #include "QskTextLabel.h"
 #include "QskTextOptions.h"
 
-namespace
+namespace QskMessageWindowImpl
 {
     class TextLabel final : public QskTextLabel
     {
@@ -42,7 +42,7 @@ QskMessageWindow::QskMessageWindow( QWindow* parent )
     setFlags( Qt::Dialog | Qt::WindowTitleHint |
         Qt::WindowCloseButtonHint | Qt::WindowSystemMenuHint );
 
-    m_data->textLabel = new TextLabel( this );
+    m_data->textLabel = new QskMessageWindowImpl::TextLabel( this );
     setDialogContentItem( m_data->textLabel );
 }
 

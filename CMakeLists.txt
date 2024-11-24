@@ -5,6 +5,11 @@
 
 cmake_minimum_required(VERSION 3.16.3)
 
+option(BUILD_UNITY "Enable unity builds" ON)
+if(BUILD_UNITY)
+    set(CMAKE_UNITY_BUILD ON)
+endif()
+
 macro(qsk_setup_options)
 
     option(BUILD_PEDANTIC     "Enable pedantic compile flags ( only GNU/CLANG )" OFF)
@@ -81,7 +86,7 @@ endmacro()
 ############################################################################
 
 project(QSkinny
-    LANGUAGES C CXX 
+    LANGUAGES C CXX
     HOMEPAGE_URL "https://github.com/uwerat/qskinny"
     VERSION 0.8.0)
 
@@ -169,4 +174,12 @@ endif()
 
 if(BUILD_PLAYGROUND)
     add_subdirectory(playground)
+endif()
+
+if(BUILD_UNITY)
+    file(GLOB_RECURSE MOC_FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/moc_*.cpp
+    )
+
+    set_source_files_properties(${MOC_FILES} PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 endif()
