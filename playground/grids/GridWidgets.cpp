@@ -7,7 +7,7 @@
 #include <QGridLayout>
 #include <QDebug>
 
-namespace
+namespace GridWidgetsImpl
 {
     class Rectangle : public QWidget
     {
@@ -74,7 +74,7 @@ GridWidgets::~GridWidgets()
 void GridWidgets::insert( const QByteArray& colorName,
     int row, int column, int rowSpan, int columnSpan )
 {
-    auto rectangle = new Rectangle( colorName );
+    auto rectangle = new GridWidgetsImpl::Rectangle( colorName );
     m_layout->addWidget( rectangle, row, column, rowSpan, columnSpan );
     rectangle->show();
 }
@@ -115,10 +115,10 @@ void GridWidgets::setStretchFactor(
 void GridWidgets::setSizeHintAt(
     int index, Qt::Orientation orientation, Qt::SizeHint which, int hint )
 {
-    Rectangle* rectangle = nullptr;
+    GridWidgetsImpl::Rectangle* rectangle = nullptr;
 
     if ( auto layoutItem = m_layout->itemAt( index ) )
-        rectangle = static_cast< Rectangle* >( layoutItem->widget() );
+        rectangle = static_cast< GridWidgetsImpl::Rectangle* >( layoutItem->widget() );
 
     if ( rectangle == nullptr )
         return;
