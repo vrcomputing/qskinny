@@ -40,11 +40,14 @@ extern void qskInheritLocale( QObject*, const QLocale& );
 static void qskResolveLocale( QskWindow* );
 static bool qskEnforcedSkin = false;
 
+#ifndef __qskSendEventTo
+#define __qskSendEventTo
 static inline void qskSendEventTo( QObject* object, QEvent::Type type )
 {
     QEvent event( type );
     QCoreApplication::sendEvent( object, &event );
 }
+#endif
 
 static QQuickItem* qskDefaultFocusItem( QQuickWindow* window )
 {

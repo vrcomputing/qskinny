@@ -16,6 +16,8 @@ macro(qsk_setup_options)
     option(BUILD_EXAMPLES     "Build qskinny examples" ON)
     option(BUILD_PLAYGROUND   "Build qskinny playground" ON)
 
+    option(BUILD_UNITY "Enable unity builds" ON)
+
     # we actually want to use cmake_dependent_option - minimum cmake version ??
 
     option( BUILD_SVG2QVG_STANDALONE "Build svg2qvg without qskinny library dependency" ON )
@@ -81,7 +83,7 @@ endmacro()
 ############################################################################
 
 project(QSkinny
-    LANGUAGES C CXX 
+    LANGUAGES C CXX
     HOMEPAGE_URL "https://github.com/uwerat/qskinny"
     VERSION 0.8.0)
 
@@ -169,4 +171,12 @@ endif()
 
 if(BUILD_PLAYGROUND)
     add_subdirectory(playground)
+endif()
+
+if(BUILD_UNITY)
+    file(GLOB_RECURSE CPP_FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/*.cpp
+    )
+
+    set_source_files_properties(${CPP_FILES} PROPERTIES SKIP_UNITY_BUILD_INCLUSION ON)
 endif()

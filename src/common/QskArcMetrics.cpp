@@ -98,10 +98,13 @@ static inline QPainterPath qskOrthogonalPath(
     return stroker.createStroke( arcPath );
 }
 
+#ifndef __qskInterpolated
+#define __qskInterpolated
 static inline qreal qskInterpolated( qreal from, qreal to, qreal ratio )
 {
     return from + ( to - from ) * ratio;
 }
+#endif
 
 static inline qreal qskEffectiveThickness( qreal radius, qreal percentage )
 {

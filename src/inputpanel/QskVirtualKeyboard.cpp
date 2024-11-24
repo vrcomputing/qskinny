@@ -10,7 +10,7 @@
 #include <qset.h>
 #include <qstylehints.h>
 
-namespace
+namespace QskVirtualKeyboardImpl
 {
     class Button : public QskPushButton
     {
@@ -64,7 +64,7 @@ class QskVirtualKeyboard::PrivateData
     const QskVirtualKeyboardLayouts::Layout* currentLayout = nullptr;
     QskVirtualKeyboard::Mode mode = QskVirtualKeyboard::LowercaseMode;
 
-    QVector< Button* > keyButtons;
+    QVector< QskVirtualKeyboardImpl::Button* > keyButtons;
     QSet< int > keyCodes;
 };
 
@@ -288,7 +288,7 @@ void QskVirtualKeyboard::updateLayout() // ### fill keyCodes here
                     const QRectF rect( xPos, yPos, keyWidth, keyHeight );
 
                     button->setGeometry( rect );
-                    button->setAutoRepeat( qskIsAutorepeat( key ) );
+                    button->setAutoRepeat( QskVirtualKeyboardImpl::qskIsAutorepeat( key ) );
                     button->setKey( key );
                     button->setText( textForKey( key ) );
 
@@ -373,7 +373,7 @@ void QskVirtualKeyboard::ensureButtons()
 
             if( index >= m_data->keyButtons.size() )
             {
-                auto button = new Button( this );
+                auto button = new QskVirtualKeyboardImpl::Button( this );
                 button->installEventFilter( this );
 
                 button->setAutoRepeat( false );
@@ -397,7 +397,7 @@ void QskVirtualKeyboard::ensureButtons()
 
 void QskVirtualKeyboard::buttonPressed()
 {
-    const auto button = static_cast< const Button* >( sender() );
+    const auto button = static_cast< const QskVirtualKeyboardImpl::Button* >( sender() );
     if ( button == nullptr )
         return;
 

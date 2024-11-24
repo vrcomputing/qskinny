@@ -10,11 +10,14 @@
 #include "QskWindow.h"
 #include "QskEvent.h"
 
+#ifndef __qskSendEventTo
+#define __qskSendEventTo
 static inline void qskSendEventTo( QObject* object, QEvent::Type type )
 {
     QEvent event( type );
     QCoreApplication::sendEvent( object, &event );
 }
+#endif
 
 extern bool qskInheritLocale( QskWindow*, const QLocale& );
 

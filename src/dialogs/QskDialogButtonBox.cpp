@@ -20,11 +20,14 @@
 
 QSK_SUBCONTROL( QskDialogButtonBox, Panel )
 
-static void qskSendEventTo( QObject* object, QEvent::Type type )
+#ifndef __qskSendEventTo
+#define __qskSendEventTo
+static inline void qskSendEventTo( QObject* object, QEvent::Type type )
 {
     QEvent event( type );
     QCoreApplication::sendEvent( object, &event );
 }
+#endif
 
 namespace
 {

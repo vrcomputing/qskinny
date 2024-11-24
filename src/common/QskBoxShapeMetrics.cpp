@@ -27,10 +27,13 @@ static void qskRegisterBoxShapeMetrics()
 
 Q_CONSTRUCTOR_FUNCTION( qskRegisterBoxShapeMetrics )
 
+namespace QskBoxShapeMetricsImpl
+{
 static inline QSizeF qskInterpolatedSize(
     const QSizeF& from, const QSizeF& to, qreal ratio )
 {
     return from + ( to - from ) * ratio;
+}
 }
 
 static inline qreal qskAbsoluted( qreal length, qreal percentage )
@@ -150,10 +153,10 @@ QskBoxShapeMetrics QskBoxShapeMetrics::interpolated(
         return to;
 
     return QskBoxShapeMetrics(
-        qskInterpolatedSize( m_radii[ 0 ], to.m_radii[ 0 ], ratio ),
-        qskInterpolatedSize( m_radii[ 1 ], to.m_radii[ 1 ], ratio ),
-        qskInterpolatedSize( m_radii[ 2 ], to.m_radii[ 2 ], ratio ),
-        qskInterpolatedSize( m_radii[ 3 ], to.m_radii[ 3 ], ratio ),
+        QskBoxShapeMetricsImpl::qskInterpolatedSize( m_radii[ 0 ], to.m_radii[ 0 ], ratio ),
+        QskBoxShapeMetricsImpl::qskInterpolatedSize( m_radii[ 1 ], to.m_radii[ 1 ], ratio ),
+        QskBoxShapeMetricsImpl::qskInterpolatedSize( m_radii[ 2 ], to.m_radii[ 2 ], ratio ),
+        QskBoxShapeMetricsImpl::qskInterpolatedSize( m_radii[ 3 ], to.m_radii[ 3 ], ratio ),
         to.m_sizeMode, to.m_scalingMode );
 }
 

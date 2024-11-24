@@ -37,10 +37,13 @@ QVector< qreal > qskDashPattern( Qt::PenStyle style )
     return pattern[ style ];
 }
 
+#ifndef __qskInterpolated
+#define __qskInterpolated
 static inline qreal qskInterpolated( qreal from, qreal to, qreal ratio )
 {
     return from + ( to - from ) * ratio;
 }
+#endif
 
 static inline QVector< qreal > qskInterpolatedSpaces(
     const QVector< qreal >& pattern, qreal progress )

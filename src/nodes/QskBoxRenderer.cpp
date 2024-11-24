@@ -17,19 +17,25 @@
 
 #include <qsggeometry.h>
 
+#ifndef __qskAllocateLines
+#define __qskAllocateLines
 static inline QskVertex::Line* qskAllocateLines(
     QSGGeometry& geometry, int lineCount )
 {
     geometry.allocate( 2 * lineCount ); // 2 points per line
     return reinterpret_cast< QskVertex::Line* >( geometry.vertexData() );
 }
+#endif
 
+#ifndef __qskAllocateColoredLines
+#define __qskAllocateColoredLines
 static inline QskVertex::ColoredLine* qskAllocateColoredLines(
     QSGGeometry& geometry, int lineCount )
 {
     geometry.allocate( 2 * lineCount ); // 2 points per line
     return reinterpret_cast< QskVertex::ColoredLine* >( geometry.vertexData() );
 }
+#endif
 
 static inline QskGradient qskEffectiveGradient(
     const QRectF& rect, const QskGradient& gradient )

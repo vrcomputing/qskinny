@@ -6,7 +6,7 @@
 #include "QskMessageSubWindow.h"
 #include "QskTextLabel.h"
 
-namespace
+namespace QskMessageSubWindowImpl
 {
     class TextLabel final : public QskTextLabel
     {
@@ -28,7 +28,7 @@ namespace
 QskMessageSubWindow::QskMessageSubWindow( QQuickItem* parent )
     : Inherited( parent )
 {
-    auto label = new TextLabel();
+    auto label = new QskMessageSubWindowImpl::TextLabel();
 
     connect( label, &QskTextLabel::textChanged,
         this, &QskMessageSubWindow::textChanged );

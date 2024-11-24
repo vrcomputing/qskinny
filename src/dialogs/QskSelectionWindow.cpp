@@ -22,7 +22,7 @@ static inline const QskSimpleListBox* qskListBox(
     return qobject_cast< QskSimpleListBox* >( window->dialogContentItem() );
 }
 
-namespace
+namespace QskSelectionWindowImpl
 {
     class ListBox final : public QskSimpleListBox
     {
@@ -49,7 +49,7 @@ QskSelectionWindow::QskSelectionWindow( QWindow* parent )
     setFlags( Qt::Dialog | Qt::WindowTitleHint |
         Qt::WindowCloseButtonHint | Qt::WindowSystemMenuHint );
 
-    auto listBox = new ListBox( this );
+    auto listBox = new QskSelectionWindowImpl::ListBox( this );
 #if 1
     listBox->setPreferredSize( 500, 500 );
 #endif

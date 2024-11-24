@@ -11,8 +11,6 @@
 #include <qeasingcurve.h>
 #include <cmath>
 
-using Q = QskProgressBar;
-
 namespace
 {
     QskIntervalF qskFillInterval( const QskProgressIndicator* indicator )
@@ -66,11 +64,11 @@ QRectF QskProgressBarSkinlet::subControlRect(
     const QskSkinnable* skinnable, const QRectF& contentsRect,
     QskAspect::Subcontrol subControl ) const
 {
-    const auto bar = static_cast< const Q* >( skinnable );
+    const auto bar = static_cast< const QskProgressBar* >( skinnable );
 
-    if( subControl == Q::Groove )
+    if( subControl == QskProgressBar::Groove )
     {
-        const auto grooveSize = bar->metric( Q::Groove | QskAspect::Size );
+        const auto grooveSize = bar->metric( QskProgressBar::Groove | QskAspect::Size );
 
         auto rect = contentsRect;
         if ( bar->orientation() == Qt::Horizontal )
@@ -87,7 +85,7 @@ QRectF QskProgressBarSkinlet::subControlRect(
         return rect;
     }
 
-    if( subControl == Q::Fill )
+    if( subControl == QskProgressBar::Fill )
     {
         return barRect( bar );
     }
@@ -98,15 +96,15 @@ QRectF QskProgressBarSkinlet::subControlRect(
 QSGNode* QskProgressBarSkinlet::updateGrooveNode(
     const QskProgressIndicator* indicator, QSGNode* node ) const
 {
-    return updateBoxNode( indicator, node, Q::Groove );
+    return updateBoxNode( indicator, node, QskProgressBar::Groove );
 }
 
 QSGNode* QskProgressBarSkinlet::updateFillNode(
     const QskProgressIndicator* indicator, QSGNode* node ) const
 {
-    const auto bar = static_cast< const Q* >( indicator );
+    const auto bar = static_cast< const QskProgressBar* >( indicator );
 
-    const auto subControl = Q::Fill;
+    const auto subControl = QskProgressBar::Fill;
 
     const auto rect = indicator->subControlRect( subControl );
     if ( rect.isEmpty() )
@@ -146,11 +144,11 @@ QSGNode* QskProgressBarSkinlet::updateFillNode(
     return updateBoxNode( indicator, node, rect, gradient, subControl );
 }
 
-QRectF QskProgressBarSkinlet::barRect( const Q* bar ) const
+QRectF QskProgressBarSkinlet::barRect( const QskProgressBar* bar ) const
 {
-    const auto subControl = Q::Groove;
+    const auto subControl = QskProgressBar::Groove;
 
-    const auto barSize = bar->metric( Q::Fill | QskAspect::Size );
+    const auto barSize = bar->metric( QskProgressBar::Fill | QskAspect::Size );
     auto rect = bar->subControlRect( subControl );
 
     if ( bar->orientation() == Qt::Horizontal )
@@ -197,7 +195,7 @@ QSizeF QskProgressBarSkinlet::sizeHint( const QskSkinnable* skinnable,
     if ( which != Qt::PreferredSize )
         return QSizeF();
 
-    const auto bar = static_cast< const Q* >( skinnable );
+    const auto bar = static_cast< const QskProgressBar* >( skinnable );
 
     const auto extent = bar->extent();
 

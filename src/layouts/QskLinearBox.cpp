@@ -8,6 +8,8 @@
 #include "QskEvent.h"
 #include "QskQuick.h"
 
+#ifndef __qskSetItemActive
+#define __qskSetItemActive
 static void qskSetItemActive( QObject* receiver, const QQuickItem* item, bool on )
 {
     /*
@@ -36,6 +38,7 @@ static void qskSetItemActive( QObject* receiver, const QQuickItem* item, bool on
         QObject::disconnect( item, &QQuickItem::implicitHeightChanged, receiver, nullptr );
     }
 }
+#endif
 
 class QskLinearBox::PrivateData
 {
