@@ -170,6 +170,7 @@ endif()
 if(TRUE) # NOT TARGET Qt::Widgets
     list(REMOVE_ITEM QSK_QT_HEADERS <QApplication>)
     list(REMOVE_ITEM QSK_QT_HEADERS <QGraphicsWidget>)
+    list(REMOVE_ITEM QSK_QT_HEADERS <QGraphicsGridLayout>)
     list(REMOVE_ITEM QSK_QT_HEADERS <QWidget>)
 endif()
 
