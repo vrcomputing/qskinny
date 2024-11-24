@@ -203,14 +203,18 @@ target_link_libraries(PCH PRIVATE
     Qt::CorePrivate
     Qt::Gui
     Qt::GuiPrivate
-    Qt::OpenGL
-    Qt::OpenGLPrivate
     Qt::Quick
     Qt::QuickPrivate
     Qt::QuickShapesPrivate
     Qt::QuickWidgets
     Qt::Svg)
 
+if(TARGET Qt::OpenGL)
+    target_link_libraries(PCH PRIVATE Qt::OpenGL)
+endif()
+if(TARGET Qt::OpenGLPrivate)
+    target_link_libraries(PCH PRIVATE Qt::OpenGLPrivate)
+endif()
 if(TARGET Qt::WebEngine)
     target_link_libraries(PCH PRIVATE Qt::WebEngine)
 endif()
