@@ -173,6 +173,7 @@ if(TRUE) # NOT TARGET Qt::Widgets
     list(REMOVE_ITEM QSK_QT_HEADERS <QGraphicsGridLayout>)
     list(REMOVE_ITEM QSK_QT_HEADERS <QGraphicsScene>)
     list(REMOVE_ITEM QSK_QT_HEADERS <QGraphicsView>)
+    list(REMOVE_ITEM QSK_QT_HEADERS <QGridLayout>)
     list(REMOVE_ITEM QSK_QT_HEADERS <QWidget>)
 endif()
 
