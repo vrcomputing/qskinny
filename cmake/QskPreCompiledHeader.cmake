@@ -177,6 +177,7 @@ if(TRUE) # NOT TARGET Qt::Widgets
     list(REMOVE_ITEM QSK_QT_HEADERS <QLabel>)
     list(REMOVE_ITEM QSK_QT_HEADERS <QListWidget>)
     list(REMOVE_ITEM QSK_QT_HEADERS <QWidget>)
+    list(REMOVE_ITEM QSK_QT_HEADERS <QQuickWidget>)
 endif()
 
 if(NOT TARGET Qt::QuickWidgets)
